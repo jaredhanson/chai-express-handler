@@ -1,0 +1,41 @@
+{
+  "name": "chai-express-handler",
+  "version": "0.0.1",
+  "description": "Helpers for testing Express handlers with the Chai assertion library.",
+  "keywords": [
+    "chai",
+    "express"
+  ],
+  "author": {
+    "name": "Jared Hanson",
+    "email": "jaredhanson@gmail.com",
+    "url": "http://www.jaredhanson.net/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jaredhanson/chai-express-handler.git"
+  },
+  "bugs": {
+    "url": "http://github.com/jaredhanson/chai-express-handler/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
+  "main": "./lib",
+  "dependencies": {
+    "utils-flatten": "1.x.x"
+  },
+  "devDependencies": {
+    "mocha": "1.x.x",
+    "chai": "1.x.x"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha --reporter spec --require test/bootstrap/node test/*.test.js"
+  }
+}
