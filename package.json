@@ -18,10 +18,11 @@
   "bugs": {
     "url": "http://github.com/jaredhanson/chai-express-handler/issues"
   },
+  "license": "MIT",
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://www.opensource.org/licenses/MIT"
+      "url": "http://opensource.org/licenses/MIT"
     }
   ],
   "main": "./lib",
@@ -29,6 +30,7 @@
     "utils-flatten": "1.x.x"
   },
   "devDependencies": {
+    "make-node": "0.3.x",
     "mocha": "1.x.x",
     "chai": "1.x.x"
   },
