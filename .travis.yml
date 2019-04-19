@@ -16,10 +16,10 @@ node_js:
   - "0.8"
 
 
-# NOTE: `istanbul` and `coveralls` are pinned for compatibility with node 0.8.
+# NOTE: `istanbul` and `codecov` are pinned for compatibility with node 0.8.
 before_install:
   - "npm install -g istanbul@0.2.2"
-  - "npm install -g codecov@3"
+  - "npm install -g codecov@2"
 
 script:
   - "make check"
