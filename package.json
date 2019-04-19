@@ -30,14 +30,14 @@
     "utils-flatten": "1.x.x"
   },
   "devDependencies": {
-    "make-node": "0.3.x",
-    "mocha": "1.x.x",
-    "chai": "1.x.x"
+    "make-node": "0.4.6",
+    "mocha": "2.x.x",
+    "chai": "2.x.x"
   },
   "engines": {
     "node": "*"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha --reporter spec --require test/bootstrap/node test/*.test.js"
+    "test": "make test"
   }
 }
