@@ -71,7 +71,7 @@ describe('chai-express-handler', function() {
         expect(res).to.have.locals({ name: 'Alice' });
         expect(res).to.have.deep.locals({ name: 'Alice', csrfToken: 'i8XNjC4b8KVok4uw5RftR38Wgp2BFwql' });
         expect(res).to.include.locals([ 'name' ]);
-        expect(res).to.include.any.locals([ 'name', 'email' ]);
+        expect(res).to.include.any.locals([ 'username', 'name' ]);
         expect(res).to.include.all.locals([ 'name', 'csrfToken' ]);
         
         expect(function () {
@@ -90,16 +90,13 @@ describe('chai-express-handler', function() {
           expect(res).to.not.have.deep.locals({ name: 'Alice', csrfToken: 'i8XNjC4b8KVok4uw5RftR38Wgp2BFwql' });
         }).to.throw("expected { Object (name, csrfToken) } to not deeply equal { Object (name, csrfToken) }");
         
-        // TODO
-        /*
         expect(function () {
-          expect(res).to.include.locals([ 'name', 'username' ]);
-        }).to.throw("expected { Object (name, csrfToken) } to have key 'username'");
-        */
+          expect(res).to.include.locals([ 'username', 'name' ]);
+        }).to.throw("expected [ 'name', 'csrfToken' ] to be a superset of [ 'username', 'name' ]");
         
         expect(function () {
           expect(res).to.not.include.locals([ 'name' ]);
-        }).to.throw("expected { Object (name, csrfToken) } to not have key 'name'");
+        }).to.throw("expected [ 'name', 'csrfToken' ] to not be a superset of [ 'name' ]");
         
         expect(function () {
           expect(res).to.include.any.locals([ 'username', 'email' ]);
@@ -108,6 +105,10 @@ describe('chai-express-handler', function() {
         expect(function () {
           expect(res).to.not.include.any.locals([ 'username', 'name' ]);
         }).to.throw("expected { Object (name, csrfToken) } to not have keys 'username', or 'name'");
+        
+        expect(function () {
+          expect(res).to.include.all.locals([ 'name' ]);
+        }).to.throw("expected { Object (name, csrfToken) } to have key 'name'");
         
         expect(function () {
           expect(res).to.include.all.locals([ 'username', 'name', 'csrfToken' ]);
