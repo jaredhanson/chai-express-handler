@@ -57,7 +57,59 @@ describe('chai-express-handler', function() {
         expect(function () {
           expect({}).to.render('home');
         }).to.throw('expected {} to be an instance of Response');
+        
+        // TODO: test if view isn't defined
+        
       }); // render method
+      
+      it('locals method', function() {
+        var res = new Response();
+        res.locals = { greeting: 'Hello', name: 'World' };
+        expect(res).to.have.locals({ name: 'World' });
+        expect(res).to.have.deep.locals({ greeting: 'Hello', name: 'World' });
+        expect(res).to.include.locals({ name: 'World' });
+        expect(res).to.include.deep.locals({ greeting: 'Hello', name: 'World' });
+        
+        expect(function () {
+          expect(res).to.have.locals({ foo: 'bar' });
+        }).to.throw("expected { greeting: 'Hello', name: 'World' } to have property 'foo'");
+        
+        expect(function () {
+          expect(res).to.have.deep.locals({ greeting: 'Hello', name: 'World', foo: 'bar' });
+        }).to.throw("expected { greeting: 'Hello', name: 'World' } to deeply equal { Object (greeting, name, ...) }");
+        
+        expect(function () {
+          expect(res).to.not.have.locals({ greeting: 'Hello' });
+        }).to.throw("expected { greeting: 'Hello', name: 'World' } to not have property 'greeting' of 'Hello'");
+        
+        expect(function () {
+          expect(res).to.not.have.deep.locals({ greeting: 'Hello', name: 'World' });
+        }).to.throw("expected { greeting: 'Hello', name: 'World' } to not deeply equal { greeting: 'Hello', name: 'World' }");
+        
+        expect(function () {
+          expect(res).to.include.locals({ foo: 'bar' });
+        }).to.throw("expected { greeting: 'Hello', name: 'World' } to have property 'foo'");
+        
+        expect(function () {
+          expect(res).to.include.deep.locals({ greeting: 'Hello', name: 'World', foo: 'bar' });
+        }).to.throw("expected { greeting: 'Hello', name: 'World' } to deeply equal { Object (greeting, name, ...) }");
+        
+        expect(function () {
+          expect(res).to.not.include.locals({ greeting: 'Hello' });
+        }).to.throw("expected { greeting: 'Hello', name: 'World' } to not have property 'greeting' of 'Hello'");
+        
+        expect(function () {
+          expect(res).to.not.include.deep.locals({ greeting: 'Hello', name: 'World' });
+        }).to.throw("expected { greeting: 'Hello', name: 'World' } to not deeply equal { greeting: 'Hello', name: 'World' }");
+        
+        expect(function () {
+          expect({}).to.have.locals({ foo: 'bar' });
+        }).to.throw('expected {} to be an instance of Response');
+        
+        expect(function () {
+          expect(new Response()).to.have.locals({ foo: 'bar' });
+        }).to.throw("expected { Object (_events, _eventsCount, ...) } to have property 'locals'");
+      }); // locals method
       
     }); // chai.Assertion
     
