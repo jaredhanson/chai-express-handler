@@ -16,6 +16,8 @@ view.
 
 ### Changed
 
+- `status()` assertion method asserts that object is an instance of `Response`,
+rather than just having a `statusCode` property.
 - Changed `Response#redirect` signature from `function(url, status)` to
 `function(status, url)`, matching Express 4.x API.
 
@@ -26,7 +28,7 @@ instead.
 
 ### Fixed
 
-- Error argument passed to `Test#dispatch` is passed into handler middleware
+- Error argument passed to `Test#dispatch()` is passed into handler middleware
 stack.
 
 ## [0.0.3] - 2018-03-23
