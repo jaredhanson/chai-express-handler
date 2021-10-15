@@ -58,8 +58,9 @@ describe('chai-express-handler', function() {
           expect({}).to.render('home');
         }).to.throw('expected {} to be an instance of Response');
         
-        // TODO: test if view isn't defined
-        
+        expect(function () {
+          expect(new Response()).to.render('home');
+        }).to.throw("expected { Object (_events, _eventsCount, ...) } to have property '_view'");
       }); // render method
       
       it('locals method', function() {
