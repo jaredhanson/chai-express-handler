@@ -64,15 +64,19 @@ describe('chai-express-handler', function() {
       
       it('locals method', function() {
         var res = new Response();
-        res.locals = { name: 'Alice', csrfToken: 'i8XNjC4b8KVok4uw5RftR38Wgp2BFwql' };
+        res.locals = Object.create(null);
+        res.locals.name = 'Alice';
+        res.locals.csrfToken = 'i8XNjC4b8KVok4uw5RftR38Wgp2BFwql';
+        
         expect(res).to.have.locals({ name: 'Alice' });
         expect(res).to.have.deep.locals({ name: 'Alice', csrfToken: 'i8XNjC4b8KVok4uw5RftR38Wgp2BFwql' });
-        expect(res).to.include.locals({ name: 'Alice' });
-        expect(res).to.include.deep.locals({ name: 'Alice', csrfToken: 'i8XNjC4b8KVok4uw5RftR38Wgp2BFwql' });
+        expect(res).to.include.locals([ 'name' ]);
+        expect(res).to.include.any.locals([ 'name', 'email' ]);
+        expect(res).to.include.all.locals([ 'name', 'csrfToken' ]);
         
         expect(function () {
-          expect(res).to.have.locals({ beep: 'boop' });
-        }).to.throw("expected { Object (name, csrfToken) } to have property 'beep'");
+          expect(res).to.have.locals({ username: 'alice' });
+        }).to.throw("expected { Object (name, csrfToken) } to have property 'username'");
         
         expect(function () {
           expect(res).to.not.have.locals({ name: 'Alice' });
@@ -87,20 +91,28 @@ describe('chai-express-handler', function() {
         }).to.throw("expected { Object (name, csrfToken) } to not deeply equal { Object (name, csrfToken) }");
         
         expect(function () {
-          expect(res).to.include.locals({ beep: 'boop' });
-        }).to.throw("expected { Object (name, csrfToken) } to have property 'beep'");
+          expect(res).to.include.locals([ 'username' ]);
+        }).to.throw("expected { Object (name, csrfToken) } to have key 'username'");
         
         expect(function () {
-          expect(res).to.not.include.locals({ name: 'Alice' });
-        }).to.throw("expected { Object (name, csrfToken) } to not have property 'name' of 'Alice'");
+          expect(res).to.not.include.locals([ 'name' ]);
+        }).to.throw("expected { Object (name, csrfToken) } to not have key 'name'");
         
         expect(function () {
-          expect(res).to.include.deep.locals({ name: 'Alice' });
-        }).to.throw("expected { Object (name, csrfToken) } to deeply equal { name: 'Alice' }");
+          expect(res).to.include.any.locals([ 'username', 'email' ]);
+        }).to.throw("expected { Object (name, csrfToken) } to have keys 'username', or 'email'");
         
         expect(function () {
-          expect(res).to.not.include.deep.locals({ name: 'Alice', csrfToken: 'i8XNjC4b8KVok4uw5RftR38Wgp2BFwql' });
-        }).to.throw("expected { Object (name, csrfToken) } to not deeply equal { Object (name, csrfToken) }");
+          expect(res).to.not.include.any.locals([ 'username', 'name' ]);
+        }).to.throw("expected { Object (name, csrfToken) } to not have keys 'username', or 'name'");
+        
+        expect(function () {
+          expect(res).to.include.all.locals([ 'username', 'name', 'csrfToken' ]);
+        }).to.throw("expected { Object (name, csrfToken) } to have keys 'username', 'name', and 'csrfToken'");
+        
+        expect(function () {
+          expect(res).to.not.include.all.locals([ 'name', 'csrfToken' ]);
+        }).to.throw("expected { Object (name, csrfToken) } to not have keys 'name', and 'csrfToken'");
         
         expect(function () {
           expect({}).to.have.locals({ foo: 'bar' });
