@@ -64,43 +64,43 @@ describe('chai-express-handler', function() {
       
       it('locals method', function() {
         var res = new Response();
-        res.locals = { greeting: 'Hello', name: 'World' };
-        expect(res).to.have.locals({ name: 'World' });
-        expect(res).to.have.deep.locals({ greeting: 'Hello', name: 'World' });
-        expect(res).to.include.locals({ name: 'World' });
-        expect(res).to.include.deep.locals({ greeting: 'Hello', name: 'World' });
+        res.locals = { name: 'Alice', csrfToken: 'i8XNjC4b8KVok4uw5RftR38Wgp2BFwql' };
+        expect(res).to.have.locals({ name: 'Alice' });
+        expect(res).to.have.deep.locals({ name: 'Alice', csrfToken: 'i8XNjC4b8KVok4uw5RftR38Wgp2BFwql' });
+        expect(res).to.include.locals({ name: 'Alice' });
+        expect(res).to.include.deep.locals({ name: 'Alice', csrfToken: 'i8XNjC4b8KVok4uw5RftR38Wgp2BFwql' });
         
         expect(function () {
-          expect(res).to.have.locals({ foo: 'bar' });
-        }).to.throw("expected { greeting: 'Hello', name: 'World' } to have property 'foo'");
+          expect(res).to.have.locals({ beep: 'boop' });
+        }).to.throw("expected { Object (name, csrfToken) } to have property 'beep'");
         
         expect(function () {
-          expect(res).to.have.deep.locals({ greeting: 'Hello', name: 'World', foo: 'bar' });
-        }).to.throw("expected { greeting: 'Hello', name: 'World' } to deeply equal { Object (greeting, name, ...) }");
+          expect(res).to.not.have.locals({ name: 'Alice' });
+        }).to.throw("expected { Object (name, csrfToken) } to not have property 'name' of 'Alice'");
         
         expect(function () {
-          expect(res).to.not.have.locals({ greeting: 'Hello' });
-        }).to.throw("expected { greeting: 'Hello', name: 'World' } to not have property 'greeting' of 'Hello'");
+          expect(res).to.have.deep.locals({ name: 'Alice' });
+        }).to.throw("expected { Object (name, csrfToken) } to deeply equal { name: 'Alice' }");
         
         expect(function () {
-          expect(res).to.not.have.deep.locals({ greeting: 'Hello', name: 'World' });
-        }).to.throw("expected { greeting: 'Hello', name: 'World' } to not deeply equal { greeting: 'Hello', name: 'World' }");
+          expect(res).to.not.have.deep.locals({ name: 'Alice', csrfToken: 'i8XNjC4b8KVok4uw5RftR38Wgp2BFwql' });
+        }).to.throw("expected { Object (name, csrfToken) } to not deeply equal { Object (name, csrfToken) }");
         
         expect(function () {
-          expect(res).to.include.locals({ foo: 'bar' });
-        }).to.throw("expected { greeting: 'Hello', name: 'World' } to have property 'foo'");
+          expect(res).to.include.locals({ beep: 'boop' });
+        }).to.throw("expected { Object (name, csrfToken) } to have property 'beep'");
         
         expect(function () {
-          expect(res).to.include.deep.locals({ greeting: 'Hello', name: 'World', foo: 'bar' });
-        }).to.throw("expected { greeting: 'Hello', name: 'World' } to deeply equal { Object (greeting, name, ...) }");
+          expect(res).to.not.include.locals({ name: 'Alice' });
+        }).to.throw("expected { Object (name, csrfToken) } to not have property 'name' of 'Alice'");
         
         expect(function () {
-          expect(res).to.not.include.locals({ greeting: 'Hello' });
-        }).to.throw("expected { greeting: 'Hello', name: 'World' } to not have property 'greeting' of 'Hello'");
+          expect(res).to.include.deep.locals({ name: 'Alice' });
+        }).to.throw("expected { Object (name, csrfToken) } to deeply equal { name: 'Alice' }");
         
         expect(function () {
-          expect(res).to.not.include.deep.locals({ greeting: 'Hello', name: 'World' });
-        }).to.throw("expected { greeting: 'Hello', name: 'World' } to not deeply equal { greeting: 'Hello', name: 'World' }");
+          expect(res).to.not.include.deep.locals({ name: 'Alice', csrfToken: 'i8XNjC4b8KVok4uw5RftR38Wgp2BFwql' });
+        }).to.throw("expected { Object (name, csrfToken) } to not deeply equal { Object (name, csrfToken) }");
         
         expect(function () {
           expect({}).to.have.locals({ foo: 'bar' });
