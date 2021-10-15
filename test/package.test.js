@@ -92,11 +92,11 @@ describe('chai-express-handler', function() {
         
         expect(function () {
           expect(res).to.include.locals([ 'username', 'name' ]);
-        }).to.throw("expected [ 'name', 'csrfToken' ] to be a superset of [ 'username', 'name' ]");
+        }).to.throw("expected { Object (name, csrfToken) } to contain keys 'username', and 'name'");
         
         expect(function () {
           expect(res).to.not.include.locals([ 'name' ]);
-        }).to.throw("expected [ 'name', 'csrfToken' ] to not be a superset of [ 'name' ]");
+        }).to.throw("expected { Object (name, csrfToken) } to not contain key 'name'");
         
         expect(function () {
           expect(res).to.include.any.locals([ 'username', 'email' ]);
