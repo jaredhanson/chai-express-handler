@@ -22,5 +22,6 @@ invoked when the handler under test renders a view.
 
 - Initial release.
 
+[Unreleased]: https://github.com/jaredhanson/chai-express-handler/compare/v0.0.3...HEAD
 [0.0.3]: https://github.com/jaredhanson/chai-express-handler/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/jaredhanson/chai-express-handler/releases/tag/v0.0.2
