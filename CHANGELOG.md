@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `render()` assertion method, used to assert that a response rendered a
 view.
 - Added `locals()` assertion method, used to assert response local variables.
+- Prepend `init()` middleware to handler under test, which initializes
+`res.locals`.
 - Added `params` property to `Request`.
 
 ### Changed
