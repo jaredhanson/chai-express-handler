@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 
-- Accept a middleware function as an argument to `Test` constructor (via
-`chai.express.handler()`).
+- Accept a middleware function as an argument to `Test` constructor, via
+`chai.express.handler()`.
 - Added `render()` assertion method, used to assert that a response rendered a
 view.
 - Added `locals()` assertion method, used to assert response local variables.
