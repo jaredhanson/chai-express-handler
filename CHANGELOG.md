@@ -35,6 +35,8 @@ passed `req` and `res` in addition to `err`.
 rather than just having a `statusCode` property.
 - Changed `Response#redirect` signature from `function(url, status)` to
 `function(status, url)`, matching Express 4.x API.
+- `Response#status()` added to `res` in `init()` middleware rather than being
+part of base `Response` prototype.
 
 ### Removed
 
@@ -42,11 +44,6 @@ rather than just having a `statusCode` property.
 argument instead.
 - Removed `Test#render()` function.  Use new `render()` assertion method
 instead.
-
-### Fixed
-
-- Error argument passed to `Test#dispatch()` is passed into handler middleware
-stack.
 
 ## [0.0.3] - 2018-03-23
 ### Added

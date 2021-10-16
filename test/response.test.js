@@ -20,4 +20,18 @@ describe('Response', function() {
   
   }); // #setHeader
   
+  describe('#status', function() {
+  
+    it('should set status code', function(done) {
+      chai.express.use(function(req, res, next) {
+        res.status(404);
+        expect(res.statusCode).to.equal(404);
+        res.end();
+      })
+      .finish(done)
+      .listen();
+    }); // should set status
+  
+  }); // #status
+  
 }); // Response

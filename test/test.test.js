@@ -23,6 +23,8 @@ describe('Test', function() {
       
         expect(res).to.be.an.instanceof(Response);
         expect(res.statusCode).to.equal(200);
+        expect(res.getHeader).to.be.a('function');
+        expect(res.setHeader).to.be.a('function');
       })
       .finish(done)
       .listen();
@@ -41,6 +43,8 @@ describe('Test', function() {
       
           expect(res).to.be.an.instanceof(Response);
           expect(res.statusCode).to.equal(200);
+          expect(res.getHeader).to.be.a('function');
+          expect(res.setHeader).to.be.a('function');
         
           cb();
         });
