@@ -2,8 +2,6 @@
 
 var expect = require('chai').expect;
 var chai = require('chai');
-var Request = require('../../lib/request');
-var Response = require('../../lib/response');
 
 
 describe('middleware/query', function() {

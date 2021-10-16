@@ -2,8 +2,6 @@
 
 var expect = require('chai').expect;
 var chai = require('chai');
-var Request = require('../../lib/request');
-var Response = require('../../lib/response');
 
 
 describe('middleware/init', function() {
@@ -40,7 +38,6 @@ describe('middleware/init', function() {
       expect(res.locals).to.be.undefined;
     })
     .finish(function() {
-      expect(this).to.be.an.instanceof(Response);
       expect(this).to.have.deep.locals({});
       done();
     })
@@ -55,7 +52,6 @@ describe('middleware/init', function() {
       res.locals = { name: 'Alice' };
     })
     .finish(function() {
-      expect(this).to.be.an.instanceof(Response);
       expect(this).to.have.deep.locals({ name: 'Alice' });
       done();
     })
