@@ -31,7 +31,7 @@
   ],
   "main": "./lib",
   "dependencies": {
-    "utils-flatten": "1.x.x"
+    "array-flatten": "1.1.1"
   },
   "devDependencies": {
     "make-node": "0.4.6",
