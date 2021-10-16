@@ -14,7 +14,7 @@ describe('chai-express-handler', function() {
   
   it('should add express helper to chai', function() {
     expect(chai.express).to.be.an('object');
-    expect(chai.express.handler).to.be.a('function');
+    expect(chai.express.use).to.be.a('function');
   });
   
   describe('chai.Assertion', function() {

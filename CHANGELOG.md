@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Accept a middleware function as an argument to `Test` constructor, via
-`chai.express.handler()`.
+`chai.express.use()`.
 - Added `render()` assertion method, used to assert that a response rendered a
 view.
 - Added `locals()` assertion method, used to assert response local variables.
@@ -20,6 +20,11 @@ view.
 
 - Helper function to set up test case is now at `chai.express.use` rather than
 `chai.express.handler` to more closely mimic the `express` API.
+- `Test#dispatch` renamed to `Test#listen` to mimic the `express` and `http`
+APIs.
+- `Test#req` renamed to `Test#request` and now takes synchronous callbacks with
+`function(req, res)` signature and asynchronous callbacks with `function(req, res, cb)`
+signature to mimic `http.Server` `connection` event.
 - `status()` assertion method asserts that object is an instance of `Response`,
 rather than just having a `statusCode` property.
 - Changed `Response#redirect` signature from `function(url, status)` to
@@ -27,6 +32,8 @@ rather than just having a `statusCode` property.
 
 ### Removed
 
+- Removed `Test#res()` function.  Use `Test#request()` and the second `res`
+argument instead.
 - Removed `Test#render()` function.  Use new `render()` assertion method
 instead.
 
