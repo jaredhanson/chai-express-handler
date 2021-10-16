@@ -23,6 +23,7 @@ describe('Test', function() {
       
         expect(res).to.be.an.instanceof(Response);
         expect(res.statusCode).to.equal(200);
+        expect(res.writeHead).to.be.a('function');
         expect(res.getHeader).to.be.a('function');
         expect(res.setHeader).to.be.a('function');
       })
@@ -43,6 +44,7 @@ describe('Test', function() {
       
           expect(res).to.be.an.instanceof(Response);
           expect(res.statusCode).to.equal(200);
+          expect(res.writeHead).to.be.a('function');
           expect(res.getHeader).to.be.a('function');
           expect(res.setHeader).to.be.a('function');
         
