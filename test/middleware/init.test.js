@@ -6,6 +6,18 @@ var chai = require('chai');
 
 describe('middleware/init', function() {
   
+  it('initializes response prototype', function(done) {
+    chai.express.use(function(req, res, next) {
+      expect(res.status).to.be.a('function');
+      res.end();
+    })
+    .request(function(req, res) {
+      expect(res.status).to.be.undefined;
+    })
+    .finish(done)
+    .listen();
+  }); // initializes req.params
+  
   it('initializes req.params', function(done) {
     chai.express.use(function(req, res, next) {
       expect(req.params).to.deep.equal({});

@@ -10,7 +10,8 @@ describe('Response', function() {
   
     it('should set header', function(done) {
       chai.express.use(function(req, res, next) {
-        res.setHeader('Cache-Control', 'no-store');
+        var rv = res.setHeader('Cache-Control', 'no-store');
+        expect(rv).to.equal(res);
         expect(res.getHeader('Cache-Control')).to.equal('no-store');
         res.end();
       })
@@ -24,7 +25,8 @@ describe('Response', function() {
   
     it('should set status code', function(done) {
       chai.express.use(function(req, res, next) {
-        res.status(404);
+        var rv = res.status(404);
+        expect(rv).to.equal(res);
         expect(res.statusCode).to.equal(404);
         res.end();
       })
