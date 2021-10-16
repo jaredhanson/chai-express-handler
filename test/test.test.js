@@ -22,7 +22,7 @@ describe('Test', function() {
       expect(res.statusCode).to.equal(200);
       expect(res.locals).to.be.undefined;
     })
-    .end(function() {
+    .finish(function() {
       expect(this).to.be.an.instanceof(Response);
       done();
     })
@@ -47,7 +47,7 @@ describe('Test', function() {
         cb();
       });
     })
-    .end(function() {
+    .finish(function() {
       expect(this).to.be.an.instanceof(Response);
       done();
     })
@@ -58,7 +58,7 @@ describe('Test', function() {
     chai.express.use(function(req, res, next) {
       res.end();
     })
-    .end(function() {
+    .finish(function() {
       expect(this).to.be.an.instanceof(Response);
       done();
     })

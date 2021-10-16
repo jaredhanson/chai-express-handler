@@ -16,11 +16,7 @@ describe('middleware/init', function() {
     .request(function(req, res) {
       expect(req.params).to.be.undefined;
     })
-    .end(function() {
-      expect(this).to.be.an.instanceof(Response);
-      expect(this).to.have.deep.locals({});
-      done();
-    })
+    .finish(done)
     .listen();
   }); // initializes req.params
   
@@ -32,11 +28,7 @@ describe('middleware/init', function() {
     .request(function(req, res) {
       req.params = { username: 'alice' };
     })
-    .end(function() {
-      expect(this).to.be.an.instanceof(Response);
-      expect(this).to.have.deep.locals({});
-      done();
-    })
+    .finish(done)
     .listen();
   }); // preserves initialized req.params
   
@@ -47,7 +39,7 @@ describe('middleware/init', function() {
     .request(function(req, res) {
       expect(res.locals).to.be.undefined;
     })
-    .end(function() {
+    .finish(function() {
       expect(this).to.be.an.instanceof(Response);
       expect(this).to.have.deep.locals({});
       done();
@@ -62,7 +54,7 @@ describe('middleware/init', function() {
     .request(function(req, res) {
       res.locals = { name: 'Alice' };
     })
-    .end(function() {
+    .finish(function() {
       expect(this).to.be.an.instanceof(Response);
       expect(this).to.have.deep.locals({ name: 'Alice' });
       done();

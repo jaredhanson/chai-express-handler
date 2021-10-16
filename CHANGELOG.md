@@ -14,6 +14,8 @@ view.
 - Added `locals()` assertion method, used to assert response local variables.
 - Prepend `init()` middleware to handler under test, which initializes
 `req.params` and `res.locals`.
+- Prepend `query()` middleware to handler under test, which initializes
+`req.query`.
 
 ### Changed
 
@@ -24,6 +26,9 @@ APIs.
 - `Test#req` renamed to `Test#request` and now takes synchronous callbacks with
 `function(req, res)` signature and asynchronous callbacks with `function(req, res, cb)`
 signature to mimic `http.Server` `connection` event.
+- `Test#end` renamed to `Test#finish` to mimic `http.ServerResponse` `finish`
+event.  Callback no longer called with `res` as an argument as it is invoked
+with `this` context of the response.
 - `status()` assertion method asserts that object is an instance of `Response`,
 rather than just having a `statusCode` property.
 - Changed `Response#redirect` signature from `function(url, status)` to
