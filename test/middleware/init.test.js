@@ -9,10 +9,12 @@ describe('middleware/init', function() {
   it('initializes response prototype', function(done) {
     chai.express.use(function(req, res, next) {
       expect(res.status).to.be.a('function');
+      expect(res.location).to.be.a('function');
       res.end();
     })
     .request(function(req, res) {
       expect(res.status).to.be.undefined;
+      expect(res.location).to.be.undefined;
     })
     .finish(done)
     .listen();

@@ -36,4 +36,19 @@ describe('Response', function() {
   
   }); // #status
   
+  describe('#location', function() {
+  
+    it('should set location header', function(done) {
+      chai.express.use(function(req, res, next) {
+        var rv = res.location('http://example.com');
+        expect(rv).to.equal(res);
+        expect(res.getHeader('Location')).to.equal('http://example.com');
+        res.end();
+      })
+      .finish(done)
+      .listen();
+    }); // should set status
+  
+  }); // #status
+  
 }); // Response

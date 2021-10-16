@@ -37,8 +37,8 @@ rather than just having a `statusCode` property.
 `http.ServerResponse`.
 - Changed `Response#redirect` signature from `function(url, status)` to
 `function(status, url)`, matching Express 4.x API.
-- `Response#status` added to `res` in `init()` middleware rather than being
-part of base `Response` prototype.
+- `Response#status` and `Response#location` added to `res` in `init()`
+middleware rather than being part of base `Response` prototype.
 
 ### Removed
 
