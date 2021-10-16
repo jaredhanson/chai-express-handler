@@ -13,8 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 view.
 - Added `locals()` assertion method, used to assert response local variables.
 - Prepend `init()` middleware to handler under test, which initializes
-`res.locals`.
-- Added `params` property to `Request`.
+`req.params` and `res.locals`.
 
 ### Changed
 

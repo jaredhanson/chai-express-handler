@@ -8,7 +8,39 @@ var Response = require('../../lib/response');
 
 describe('middleware/init', function() {
   
-  it('initializes locals', function(done) {
+  it('initializes req.params', function(done) {
+    chai.express.use(function(req, res, next) {
+      expect(req.params).to.deep.equal({});
+      res.end();
+    })
+    .request(function(req, res) {
+      expect(req.params).to.be.undefined;
+    })
+    .end(function() {
+      expect(this).to.be.an.instanceof(Response);
+      expect(this).to.have.deep.locals({});
+      done();
+    })
+    .listen();
+  }); // initializes req.params
+  
+  it('preserves initialized req.params', function(done) {
+    chai.express.use(function(req, res, next) {
+      expect(req.params).to.deep.equal({ username: 'alice' });
+      res.end();
+    })
+    .request(function(req, res) {
+      req.params = { username: 'alice' };
+    })
+    .end(function() {
+      expect(this).to.be.an.instanceof(Response);
+      expect(this).to.have.deep.locals({});
+      done();
+    })
+    .listen();
+  }); // preserves initialized req.params
+  
+  it('initializes res.locals', function(done) {
     chai.express.use(function(req, res, next) {
       res.end();
     })
@@ -21,9 +53,9 @@ describe('middleware/init', function() {
       done();
     })
     .listen();
-  }); // initializes locals
+  }); // initializes res.locals
   
-  it('preserves initialized locals', function(done) {
+  it('preserves initialized res.locals', function(done) {
     chai.express.use(function(req, res, next) {
       res.end();
     })
@@ -36,6 +68,6 @@ describe('middleware/init', function() {
       done();
     })
     .listen();
-  }); // preserves initialized locals
+  }); // preserves initialized res.locals
   
 });
