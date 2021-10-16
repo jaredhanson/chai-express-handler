@@ -27,7 +27,32 @@ describe('Test', function() {
       done();
     })
     .listen();
-  }); // #end
+  }); // #request
+  
+  it('#request (async)', function(done) {
+    chai.express.use(function(req, res, next) {
+      res.end();
+    })
+    .request(function(req, res, cb) {
+      process.nextTick(function() {
+        expect(req).to.be.an.instanceof(Request);
+        expect(req.method).to.equal('GET');
+        expect(req.url).to.equal('/');
+        expect(req.headers).to.deep.equal({});
+      
+        expect(res).to.be.an.instanceof(Response);
+        expect(res.statusCode).to.equal(200);
+        expect(res.locals).to.be.undefined;
+        
+        cb();
+      });
+    })
+    .end(function() {
+      expect(this).to.be.an.instanceof(Response);
+      done();
+    })
+    .listen();
+  }); // #request (async)
   
   it('#end', function(done) {
     chai.express.use(function(req, res, next) {
