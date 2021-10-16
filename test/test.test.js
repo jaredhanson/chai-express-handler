@@ -8,33 +8,13 @@ var Response = require('../lib/response');
 
 describe('Test', function() {
   
-  it('#request', function(done) {
-    chai.express.use(function(req, res, next) {
-      res.end();
-    })
-    .request(function(req, res) {
-      expect(req).to.be.an.instanceof(Request);
-      expect(req.method).to.equal('GET');
-      expect(req.url).to.equal('/');
-      expect(req.headers).to.deep.equal({});
-      
-      expect(res).to.be.an.instanceof(Response);
-      expect(res.statusCode).to.equal(200);
-      expect(res.locals).to.be.undefined;
-    })
-    .finish(function() {
-      expect(this).to.be.an.instanceof(Response);
-      done();
-    })
-    .listen();
-  }); // #request
-  
-  it('#request (async)', function(done) {
-    chai.express.use(function(req, res, next) {
-      res.end();
-    })
-    .request(function(req, res, cb) {
-      process.nextTick(function() {
+  describe('#request', function() {
+    
+    it('should invoke sync callback', function(done) {
+      chai.express.use(function(req, res, next) {
+        res.end();
+      })
+      .request(function(req, res) {
         expect(req).to.be.an.instanceof(Request);
         expect(req.method).to.equal('GET');
         expect(req.url).to.equal('/');
@@ -42,27 +22,47 @@ describe('Test', function() {
       
         expect(res).to.be.an.instanceof(Response);
         expect(res.statusCode).to.equal(200);
-        expect(res.locals).to.be.undefined;
+      })
+      .finish(done)
+      .listen();
+    }); // should invoke sync callback
+    
+    it('should invoke async callback', function(done) {
+      chai.express.use(function(req, res, next) {
+        res.end();
+      })
+      .request(function(req, res, cb) {
+        process.nextTick(function() {
+          expect(req).to.be.an.instanceof(Request);
+          expect(req.method).to.equal('GET');
+          expect(req.url).to.equal('/');
+          expect(req.headers).to.deep.equal({});
+      
+          expect(res).to.be.an.instanceof(Response);
+          expect(res.statusCode).to.equal(200);
         
-        cb();
-      });
-    })
-    .finish(function() {
-      expect(this).to.be.an.instanceof(Response);
-      done();
-    })
-    .listen();
-  }); // #request (async)
+          cb();
+        });
+      })
+      .finish(done)
+      .listen();
+    }); // should invoke async callback
+    
+  }); // #request
   
-  it('#end', function(done) {
-    chai.express.use(function(req, res, next) {
-      res.end();
-    })
-    .finish(function() {
-      expect(this).to.be.an.instanceof(Response);
-      done();
-    })
-    .listen();
+  describe('#finish', function() {
+  
+    it('should invoke callback', function(done) {
+      chai.express.use(function(req, res, next) {
+        res.end();
+      })
+      .finish(function() {
+        expect(this).to.be.an.instanceof(Response);
+        done();
+      })
+      .listen();
+    }); // should invoke callback
+  
   }); // #end
   
 });
