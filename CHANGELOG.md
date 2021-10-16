@@ -35,6 +35,8 @@ passed `req` and `res` in addition to `err`.
 rather than just having a `statusCode` property.
 - `Response#setHeader` returns response object to match behavior of
 `http.ServerResponse`.
+- `Response#writeHead` returns response object to match behavior of
+`http.ServerResponse`.
 - Changed `Response#redirect` signature from `function(url, status)` to
 `function(status, url)`, matching Express 4.x API.
 - `Response#status` and `Response#location` added to `res` in `init()`
