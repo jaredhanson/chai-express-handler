@@ -18,6 +18,8 @@ view.
 
 ### Changed
 
+- Helper function to set up test case is now at `chai.express.use` rather than
+`chai.express.handler` to more closely mimic the `express` API.
 - `status()` assertion method asserts that object is an instance of `Response`,
 rather than just having a `statusCode` property.
 - Changed `Response#redirect` signature from `function(url, status)` to
