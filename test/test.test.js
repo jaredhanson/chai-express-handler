@@ -2,6 +2,7 @@
 
 var expect = require('chai').expect;
 var chai = require('chai');
+var Test = require('../lib/test');
 var Request = require('../lib/request');
 var Response = require('../lib/response');
 
@@ -63,6 +64,38 @@ describe('Test', function() {
       .listen();
     }); // should invoke callback
   
-  }); // #end
+  }); // #finish
+  
+  describe('#next', function() {
+  
+    it('should invoke callback', function(done) {
+      chai.express.use(function(req, res, next) {
+        next();
+      })
+      .next(function(err, req, res) {
+        expect(this).to.be.an.instanceof(Test);
+        expect(err).to.be.undefined;
+        expect(req).to.be.an.instanceof(Request);
+        expect(res).to.be.an.instanceof(Response);
+        done();
+      })
+      .listen();
+    }); // should invoke callback
+    
+    it('should invoke callback with error', function(done) {
+      chai.express.use(function(req, res, next) {
+        next(new Error('something went wrong'));
+      })
+      .next(function(err, req, res) {
+        expect(this).to.be.an.instanceof(Test);
+        expect(err).to.be.an.instanceof(Error);
+        expect(req).to.be.an.instanceof(Request);
+        expect(res).to.be.an.instanceof(Response);
+        done();
+      })
+      .listen();
+    }); // should invoke callback with error
+  
+  }); // #finish
   
 });

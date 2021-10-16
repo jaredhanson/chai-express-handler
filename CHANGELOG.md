@@ -29,6 +29,8 @@ signature to mimic `http.Server` `connection` event.
 - `Test#end` renamed to `Test#finish` to mimic `http.ServerResponse` `finish`
 event.  Callback no longer called with `res` as an argument as it is invoked
 with `this` context of the response.
+- `Test#next` callback invoked with `this` context set to `Test` instance an
+passed `req` and `res` in addition to `err`.
 - `status()` assertion method asserts that object is an instance of `Response`,
 rather than just having a `statusCode` property.
 - Changed `Response#redirect` signature from `function(url, status)` to
