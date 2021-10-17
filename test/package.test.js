@@ -36,6 +36,24 @@ describe('chai-express-handler', function() {
       }).to.throw("expected {} to be an instance of Response");
     }); // status method
     
+    it('body method', function() {
+      var resText = new Response();
+      resText.body = 'some text'
+      expect(resText).to.have.body('some text');
+      
+      expect(function () {
+        expect(resText).to.have.body('other text');
+      }).to.throw("expected response to have body 'other text' but got 'some text'");
+      
+      expect(function () {
+        expect(resText).to.not.have.body('some text');
+      }).to.throw("expected response to not have body 'some text'");
+      
+      expect(function () {
+        expect({}).to.have.body('some text');
+      }).to.throw("expected {} to be an instance of Response");
+    }); // body method
+    
     it('render method', function() {
       var res = new Response();
       res._view = 'home';

@@ -33,6 +33,8 @@ with `this` context of the response.
 passed `req` and `res` in addition to `err`.
 - `status()` assertion method asserts that object is an instance of `Response`,
 rather than just having a `statusCode` property.
+- `body()` assertion method asserts that object is an instance of `Response`,
+rather than just having a `body` property.
 - `Response#setHeader` returns response object to match behavior of
 `http.ServerResponse`.
 - `Response#writeHead` returns response object to match behavior of
