@@ -69,7 +69,24 @@ describe('Response', function() {
         done();
       })
       .listen();
-    }); // should set status
+    }); // should send object as json
+  
+  }); // #send
+  
+  describe('#json', function() {
+  
+    it('should send json', function(done) {
+      chai.express.use(function(req, res, next) {
+        var rv = res.json({ user: 'tobi' });
+        expect(rv).to.equal(res);
+      })
+      .finish(function() {
+        expect(this.statusCode).to.equal(200);
+        expect(this.getHeader('Content-Type')).to.equal('application/json');
+        done();
+      })
+      .listen();
+    }); // should send json
   
   }); // #send
   
