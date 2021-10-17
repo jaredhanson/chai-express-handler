@@ -12,6 +12,8 @@ describe('middleware/init', function() {
       expect(res.send).to.be.a('function');
       expect(res.json).to.be.a('function');
       expect(res.location).to.be.a('function');
+      expect(res.redirect).to.be.a('function');
+      expect(res.render).to.be.a('function');
       res.end();
     })
     .request(function(req, res) {
@@ -19,6 +21,8 @@ describe('middleware/init', function() {
       expect(res.send).to.be.undefined;
       expect(res.json).to.be.undefined;
       expect(res.location).to.be.undefined;
+      expect(res.redirect).to.be.undefined;
+      expect(res.render).to.be.undefined;
     })
     .finish(done)
     .listen();

@@ -122,4 +122,21 @@ describe('Response', function() {
   
   }); // #redirect
   
+  describe('#render', function() {
+  
+    it('should render', function(done) {
+      chai.express.use(function(req, res, next) {
+        var rv = res.render('index');
+        expect(rv).to.be.undefined;
+      })
+      .finish(function() {
+        expect(this.statusCode).to.equal(200);
+        expect(this._view).to.equal('index');
+        done();
+      })
+      .listen();
+    }); // should render
+  
+  }); // #render
+  
 }); // Response
