@@ -38,8 +38,14 @@ describe('chai-express-handler', function() {
     
     it('body method', function() {
       var resText = new Response();
-      resText.body = 'some text'
+      resText.body = 'some text';
       expect(resText).to.have.body('some text');
+      expect(resText).to.have.deep.body('some text');
+      
+      var resJSON = new Response();
+      resJSON.body = { some: 'json' };
+      expect(resJSON).to.have.body({ some: 'json' });
+      expect(resJSON).to.have.deep.body({ some: 'json' });
       
       expect(function () {
         expect(resText).to.have.body('other text');
@@ -48,6 +54,14 @@ describe('chai-express-handler', function() {
       expect(function () {
         expect(resText).to.not.have.body('some text');
       }).to.throw("expected response to not have body 'some text'");
+      
+      expect(function () {
+        expect(resJSON).to.have.body({ other: 'json' });
+      }).to.throw("expected { some: 'json' } to deeply equal { other: 'json' }");
+      
+      expect(function () {
+        expect(resJSON).to.not.have.body({ some: 'json' });
+      }).to.throw("expected { some: 'json' } to not deeply equal { some: 'json' }");
       
       expect(function () {
         expect({}).to.have.body('some text');

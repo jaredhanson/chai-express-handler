@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Accept a middleware function as an argument to `Test` constructor, via
 `chai.express.use()`.
+- `body()` assertion method support for object argument, used to assert that a
+response has an exact body using deep equality.
 - Added `render()` assertion method, used to assert that a response rendered a
 view.
 - Added `locals()` assertion method, used to assert response local variables.
