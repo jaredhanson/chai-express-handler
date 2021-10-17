@@ -56,6 +56,23 @@ describe('Response', function() {
   
   }); // #status
   
+  describe('#send', function() {
+  
+    it('should send object as json', function(done) {
+      chai.express.use(function(req, res, next) {
+        var rv = res.send({ some: 'json' });
+        expect(rv).to.equal(res);
+      })
+      .finish(function() {
+        expect(this.statusCode).to.equal(200);
+        expect(this.getHeader('Content-Type')).to.equal('application/json');
+        done();
+      })
+      .listen();
+    }); // should set status
+  
+  }); // #send
+  
   describe('#location', function() {
   
     it('should set location header', function(done) {
