@@ -88,7 +88,7 @@ describe('Response', function() {
       .listen();
     }); // should send json
   
-  }); // #send
+  }); // #json
   
   describe('#location', function() {
   
@@ -103,6 +103,23 @@ describe('Response', function() {
       .listen();
     }); // should set status
   
-  }); // #status
+  }); // #location
+  
+  describe('#redirect', function() {
+  
+    it('should redirect', function(done) {
+      chai.express.use(function(req, res, next) {
+        var rv = res.redirect('http://example.com');
+        expect(rv).to.be.undefined;
+      })
+      .finish(function() {
+        expect(this.statusCode).to.equal(302);
+        expect(this.getHeader('Location')).to.equal('http://example.com');
+        done();
+      })
+      .listen();
+    }); // should redirect
+  
+  }); // #redirect
   
 }); // Response
