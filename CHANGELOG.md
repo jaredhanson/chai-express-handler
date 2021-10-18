@@ -15,7 +15,7 @@ response has an exact body using deep equality.
 view.
 - Added `locals()` assertion method, used to assert response local variables.
 - Prepend `init()` middleware to handler under test, which initializes
-`req.params` and `res.locals`.
+`req.params` and `res.locals` and exposes `req` and `res` to each other.
 - Prepend `query()` middleware to handler under test, which initializes
 `req.query`.
 

@@ -6,6 +6,20 @@ var chai = require('chai');
 
 describe('middleware/init', function() {
   
+  it('exposes req and res to each other', function(done) {
+    chai.express.use(function(req, res, next) {
+      expect(req.res).to.equal(res);
+      expect(res.req).to.equal(req);
+      res.end();
+    })
+    .request(function(req, res) {
+      expect(req.res).to.be.undefined;
+      expect(res.req).to.be.undefined;
+    })
+    .finish(done)
+    .listen();
+  }); // exposes req and res to each other
+  
   it('initializes response prototype', function(done) {
     chai.express.use(function(req, res, next) {
       expect(res.status).to.be.a('function');
